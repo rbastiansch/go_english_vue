@@ -1,21 +1,10 @@
 <script>
-  import Vue from 'vue';
   // Importing Line class from the vue-chartjs wrapper
   import { Doughnut } from 'vue-chartjs';
   // Exporting this so it can be used in other components
   export default Doughnut.extend({
     name: 'sentences-chart',
-    props: {
-      all: {
-        default: 1,
-      },
-      today: {
-        default: 1,
-      },
-      tomorrow: {
-        default: 1,
-      },
-    },
+    props: ['sentences'],
     data() {
       return {
         datacollection: {
@@ -29,7 +18,7 @@
               borderWidth: 1,
               pointBorderColor: '#249EBF',
               // Data to be represented on y-axis
-              data: [this.all, this.today, this.tomorrow],
+              data: [this.sentences.all, this.sentences.today, this.sentences.tomorrow],
             },
           ],
         },
@@ -54,24 +43,6 @@
     },
     mounted() {
       this.renderChart(this.datacollection, this.options);
-      this.updateChart();
-    },
-    watch: {
-      all() {
-        this.updateChart();
-      },
-      today() {
-        this.updateChart();
-      },
-      tomorrow() {
-        this.updateChart();
-      },
-    },
-    methods: {
-      updateChart() {
-        Vue.set(this.datacollection.datasets[0], 'data', [this.all, this.today, this.tomorrow]);
-        this.renderChart(this.datacollection, this.options);
-      },
     },
   });
 </script>

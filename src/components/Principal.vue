@@ -15,15 +15,13 @@
       <div class="col-9">
         <div class="row d-flex justify-content-around">
           <div class="col-sm-4 pb-5">
-            <texts-chart v-bind:started="texts.started"
-                         v-bind:done="texts.done"
-                         v-bind:todo="texts.todo">
+            <texts-chart v-if="texts"
+                         v-bind:texts="texts">
             </texts-chart>
           </div>
           <div class="col-sm-4 pb-5">
-            <sentences-chart v-bind:all="sentences.all"
-                             v-bind:today="sentences.today"
-                             v-bind:tomorrow="sentences.tomorrow">
+            <sentences-chart v-if="texts"
+                             v-bind:sentences="sentences">
             </sentences-chart>
           </div>
         </div>
@@ -59,7 +57,6 @@ export default {
     return {
       texts: '',
       sentences: '',
-      dataChart: [],
     };
   },
   mounted() {
